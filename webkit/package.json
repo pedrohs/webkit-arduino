@@ -1,0 +1,10 @@
+{
+  "main": "index.html",
+  "version": "1.0.0",
+  "name": "Potenciometros",
+  "window": {
+    "width": 800,
+    "height": 480,
+    "toolbar": false
+  }
+}

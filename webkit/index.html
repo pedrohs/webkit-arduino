@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Arduino + Socket.io</title>
+	<link rel="stylesheet" href="assets/css/semantic.css">
+	<link rel="stylesheet" href="assets/css/jquery.circliful.css">
+	<script src="assets/js/jquery-2.1.4.min.js"></script>
+	<script src="assets/js/jquery.circliful.js"></script>
+	<script src="assets/js/socket.io-1.3.5.js"></script>
+	<script src="assets/js/semantic.js"></script>
+	<script>
+		$(document).ready(function(){
+			var socket = io('http://192.168.1.100:4000');
+
+			socket.on('potenc1', function(value){
+				$('#progress1').progress({
+					percent: value
+				});
+				$("#progress1 > .label").text(value + '%');
+				$('#potenc1').empty().removeData().attr('data-percent', value).circliful();
+				$('#potenc1').attr('data-text', value + '%');
+			});
+			socket.on('potenc2', function(value){
+				$('#progress2').progress({
+					percent: value
+				});
+				$("#progress2 > .label").text(value + '%');
+				$('#potenc2').empty().removeData().attr('data-percent', value).circliful();
+				$('#potenc2').attr('data-text', value + '%');
+			});
+			$('#potenc1').circliful();
+			$('#potenc2').circliful();
+		});
+	</script>
+	<style>
+		body{
+			padding-top: 15px;
+		}
+		.circle{
+			width: 50%;
+			float: left;
+		}
+		.circle > div {
+			margin: 0 auto;
+		}
+		#circles{
+			width: 100%;
+			height: 200px;
+		}
+		#progress{
+			padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="ui center aligned header">Potenciômetros:</h1>
+	<div class="ui divider"></div>
+
+	<div id="circles">
+		<div class="circle">
+			<div id="potenc1" data-dimension="250" data-type="half" data-text="" data-info="Potenc 1" data-width="30" data-fontsize="38" data-fgcolor="#19b698" data-animationstep="0" data-bgcolor="#eee" data-fill="#fff" data-total="100" data-icon="long-arrow-up" data-icon-size="28" data-icon-color="#fff" data-border="inline" data-bordersize="15"></div>
+		</div>
+		<div class="circle">
+			<div id="potenc2" data-dimension="250" data-type="half" data-text="" data-info="Potenc 1" data-width="30" data-fontsize="38" data-fgcolor="#19b698" data-animationstep="0" data-bgcolor="#eee" data-fill="#fff" data-total="100" data-icon="long-arrow-up" data-icon-size="28" data-icon-color="#fff" data-border="inline" data-bordersize="15"></div>
+		</div>
+	</div>
+
+
+	<div id="progress">
+		<div class="ui teal progress" id="progress1">
+			<div class="bar"></div>
+			<div class="label">0%</div>
+		</div>
+
+		<div class="ui blue progress" id="progress2">
+			<div class="bar"></div>
+			<div class="label">0%</div>
+		</div>
+	</div>
+	
+</body>
+</html>
